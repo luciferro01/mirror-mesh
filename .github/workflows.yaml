@@ -1,0 +1,26 @@
+name: Windows Release Build
+
+on:
+  push:
+    branches:
+      - main # Or your main branch name
+
+jobs:
+  build:
+    runs-on: windows-latest # Use a Windows environment
+
+    steps:
+      - uses: actions/checkout@v4 # Check out your code
+
+      - uses: subosito/flutter-action@v2 # Set up Flutter
+        with:
+          channel: 'stable' # Or 'beta' or 'dev' depending on your needs
+
+      - run: flutter pub get # Get dependencies
+
+      - run: flutter build windows --release # Build the Windows release
+
+      - uses: actions/upload-artifact@v4 # Upload the build artifacts
+        with:
+          name: windows-release
+          path: build/windows/runner/Release/ # Path to your build output
