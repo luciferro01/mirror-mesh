@@ -103,7 +103,7 @@ class HomeScreen extends ConsumerWidget {
   }
 
   Widget _buildStatusCard(
-    AsyncValue networkInfoAsync,
+    AsyncValue<DeviceNetworkInfo> networkInfoAsync,
     ServerStatus serverStatus,
   ) {
     return Container(
@@ -160,7 +160,10 @@ class HomeScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildNetworkInfo(dynamic networkInfo, ServerStatus serverStatus) {
+  Widget _buildNetworkInfo(
+    DeviceNetworkInfo networkInfo,
+    ServerStatus serverStatus,
+  ) {
     return Column(
       children: [
         _buildInfoRow(

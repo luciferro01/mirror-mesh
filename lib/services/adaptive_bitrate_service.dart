@@ -148,6 +148,19 @@ class AdaptiveBitrateService {
     return _targetBitrates[connectionId];
   }
 
+  /// Adjusts bitrate specifically for high latency connections
+  void adjustBitrateForLatency(String connectionId, int newBitrate) {
+    final currentBitrate = _targetBitrates[connectionId];
+    if (currentBitrate != null && currentBitrate != newBitrate) {
+      _targetBitrates[connectionId] = newBitrate;
+      _lastAdjustments[connectionId] = DateTime.now();
+
+      debugPrint(
+        'Latency-based bitrate adjustment for $connectionId: ${currentBitrate}bps -> ${newBitrate}bps',
+      );
+    }
+  }
+
   /// Disposes of the service
   void dispose() {
     for (final timer in _monitoringTimers.values) {

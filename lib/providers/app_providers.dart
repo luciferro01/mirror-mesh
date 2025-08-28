@@ -109,7 +109,8 @@ final screenSourcesProvider = FutureProvider<List<ScreenSource>>((ref) {
 });
 
 final selectedScreenSourceProvider = StateProvider<ScreenSource?>((ref) {
-  return null;
+  final appState = ref.watch(appStateProvider);
+  return appState.selectedScreenSource;
 });
 
 final selectedQualityProvider = StateProvider<QualitySettings>((ref) {
